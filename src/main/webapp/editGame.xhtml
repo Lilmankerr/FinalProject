@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <style type="text/css">
+        body{
+            background-color: red;
+        }
+
+    </style>
+
+    <h:form>
+        <p:panel id="panel" header="New Game"
+                 style="background-color: yellow;
+                 font-family: 'Comic Sans MS';">
+
+            <p:messages id="msgs" />
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="name" value="Name:" />
+                <p:inputText id="name" value="#{editGamesView.name}" required="true" label="name">
+
+                    <p:ajax update="name" event="keyup" />
+                </p:inputText>
+                <p:message for="name" id="msgname" display="icon" />
+
+                <p:outputLabel for="system" value="System: " />
+                <p:selectOneMenu id="system" value="#{editGamesView.system}">
+                    <f:selectItem itemLabel="PS4" itemValue="PS4" noSelectionOption="true" />
+                    <f:selectItem itemLabel="XBOX" itemValue="XBOX" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="NINTENDO" itemValue="NINTENDO" noSelectionOption="true" />
+                    <f:selectItems value="#{editGamesView.system}" />
+                    <p:ajax update="msgsystem" event="keyup" />
+                </p:selectOneMenu>
+                <p:message for="system" id="msgsystem" display="icon" />
+
+                <p:outputLabel for="price" value="Price:" />
+                <p:inputText id="price" value="#{editGamesView.price}" required="true" label="price">
+                    <f:validator validatorId="priceValidator"/>
+                    <p:ajax update="price" event="keyup" />
+                </p:inputText>
+                <p:message for="price" id="msgprice" display="icon" />
+
+                <p:outputLabel for="quantity" value="Quantity:" />
+                <p:inputText id="quantity" value="#{editGamesView.quantity}" required="true" label="quantity">
+                    <f:validator validatorId="quantityValidator"/>
+                    <p:ajax update="quantity" event="keyup" />
+                </p:inputText>
+                <p:message for="quantity" id="msgquantity" display="icon" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Add To Cart" update="panel"
+                             action="#{editGamesView.save}" icon="pi pi-check"
+                             style="background-color: green;
+                                    font-family: 'Comic Sans MS';"/>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
